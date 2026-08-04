@@ -1,5 +1,5 @@
 import { test, expect } from "../../src/fixtures/api.fixture.js";
-import { expectNoServerError } from "../../src/core/http/assertions.js";
+import { expectLiveSuccess } from "../../src/core/http/assertions.js";
 import { labelTest } from "../../src/core/testing/allure.js";
 
 for (const row of [
@@ -17,11 +17,9 @@ for (const row of [
     });
 
     const response = await facts.list(row.params);
-    expectNoServerError(response);
-    if (response.ok) {
-      expect(Array.isArray(response.body)).toBe(true);
-      expect((response.body as unknown[]).length).toBeLessThanOrEqual(row.params.limit);
-    }
+    expectLiveSuccess(response);
+    expect(Array.isArray(response.body)).toBe(true);
+    expect((response.body as unknown[]).length).toBeLessThanOrEqual(row.params.limit);
   });
 }
 
@@ -34,9 +32,7 @@ test("Random fact endpoint returns a stable response shape", async ({ facts }) =
   });
 
   const response = await facts.random({ include_sources: false, lang: "en" });
-  expectNoServerError(response);
-  if (response.ok) {
-    expect(typeof response.body).toBe("object");
-    expect(response.body).not.toBeNull();
-  }
+  expectLiveSuccess(response);
+  expect(typeof response.body).toBe("object");
+  expect(response.body).not.toBeNull();
 });
