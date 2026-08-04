@@ -1,8 +1,5 @@
 import { test, expect } from "../../src/fixtures/api.fixture.js";
-import {
-  expectLiveSuccess,
-  expectNoServerError,
-} from "../../src/core/http/assertions.js";
+import { expectLiveSuccess, expectNoServerError } from "../../src/core/http/assertions.js";
 import { breedListSchema, breedSchema } from "../../src/domains/breeds/breeds.schemas.js";
 import { labelTest } from "../../src/core/testing/allure.js";
 
