@@ -14,6 +14,7 @@ const schema = z.object({
   DOG_API_SUB_ID: z.string().min(1).max(64).default("rest-api-tests"),
   RUN_MUTATION_TESTS: booleanValue,
   RUN_UPLOAD_TESTS: booleanValue,
+  STRICT_PROVIDER_AVAILABILITY: booleanValue,
   TEST_WORKERS: z.coerce.number().int().min(1).max(16).default(4),
   TEST_TIMEOUT_MS: z.coerce.number().int().min(5_000).max(180_000).default(30_000),
   RESPONSE_TIME_BUDGET_MS: z.coerce.number().int().min(100).default(2_500),
