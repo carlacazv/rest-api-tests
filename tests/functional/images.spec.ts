@@ -1,5 +1,9 @@
 import { test, expect } from "../../src/fixtures/api.fixture.js";
-import { expectNoServerError, expectSuccess } from "../../src/core/http/assertions.js";
+import {
+  expectLiveSuccess,
+  expectNoServerError,
+  expectProviderRouteAvailable,
+} from "../../src/core/http/assertions.js";
 import { imageListSchema, imageSchema } from "../../src/domains/images/images.schemas.js";
 import { labelTest } from "../../src/core/testing/allure.js";
 
@@ -20,7 +24,7 @@ for (const row of decisionRows) {
     });
 
     const response = await images.search(row.params);
-    expectSuccess(response);
+    expectLiveSuccess(response);
     const parsed = imageListSchema.safeParse(response.body);
     expect(parsed.success, parsed.success ? "" : parsed.error.message).toBe(true);
     expect(Array.isArray(response.body) ? response.body.length : 0).toBeLessThanOrEqual(3);
@@ -36,13 +40,13 @@ test("An image returned by search can be retrieved by ID", async ({ images }) =>
   });
 
   const searchResponse = await images.search({ limit: 1 });
-  expectSuccess(searchResponse);
+  expectLiveSuccess(searchResponse);
   const list = imageListSchema.parse(searchResponse.body);
   const first = list[0];
   expect(first).toBeDefined();
 
   const detailResponse = await images.getById(first!.id);
-  expectSuccess(detailResponse);
+  expectLiveSuccess(detailResponse);
   const detail = imageSchema.parse(detailResponse.body);
   expect(detail.id).toBe(first!.id);
   expect(detail.url).toBe(first!.url);
@@ -57,6 +61,7 @@ test("Unknown image ID is handled predictably", async ({ images }) => {
   });
 
   const response = await images.getById("unknown-image-id-for-api-tests");
+  expectProviderRouteAvailable(response);
   expectNoServerError(response);
   expect(response.status).toBeGreaterThanOrEqual(400);
 });
