@@ -1,5 +1,5 @@
 import { test, expect } from "../../src/fixtures/api.fixture.js";
-import { expectNoServerError } from "../../src/core/http/assertions.js";
+import { expectLiveSuccess } from "../../src/core/http/assertions.js";
 import { buildPairwiseCases } from "../../src/core/testing/pairwise.js";
 import { labelTest } from "../../src/core/testing/allure.js";
 
@@ -25,10 +25,8 @@ for (const [index, row] of cases.entries()) {
       has_breeds: row.hasBreeds,
       limit: row.limit,
     });
-    expectNoServerError(response);
-    if (response.ok) {
-      expect(Array.isArray(response.body)).toBe(true);
-      expect((response.body as unknown[]).length).toBeLessThanOrEqual(row.limit);
-    }
+    expectLiveSuccess(response);
+    expect(Array.isArray(response.body)).toBe(true);
+    expect((response.body as unknown[]).length).toBeLessThanOrEqual(row.limit);
   });
 }
