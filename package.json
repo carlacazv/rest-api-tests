@@ -1,0 +1,41 @@
+{
+  "name": "thedogapi-rest-api-tests",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Risk-based REST API test automation for The Dog API using Playwright and TypeScript.",
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "clean": "node scripts/clean.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run format:check && npm run typecheck",
+    "test": "playwright test",
+    "test:public": "playwright test --project=public",
+    "test:authenticated": "playwright test --project=authenticated",
+    "test:mutations": "RUN_MUTATION_TESTS=true playwright test --project=mutations",
+    "test:uploads": "RUN_MUTATION_TESTS=true RUN_UPLOAD_TESTS=true playwright test --project=mutations --grep @upload",
+    "test:security": "playwright test --project=public --grep @security",
+    "test:contract": "playwright test --project=public --grep @contract",
+    "test:smoke": "playwright test --project=public --grep @smoke",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report",
+    "openapi:snapshot": "tsx scripts/snapshot-openapi.ts",
+    "coverage:report": "tsx scripts/generate-coverage-report.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "@types/node": "24.3.0",
+    "allure-commandline": "2.43.0",
+    "allure-js-commons": "3.10.2",
+    "allure-playwright": "3.10.2",
+    "dotenv": "17.4.2",
+    "prettier": "3.9.6",
+    "tsx": "4.22.4",
+    "typescript": "7.0.2",
+    "zod": "4.4.3"
+  }
+}

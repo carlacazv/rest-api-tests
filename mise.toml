@@ -1,0 +1,71 @@
+[tools]
+node = "24.18.0"
+java = "21"
+
+[tasks.install]
+description = "Install declared dependencies"
+run = "npm install"
+
+[tasks.clean]
+description = "Remove generated test artifacts"
+run = "npm run clean"
+
+[tasks.format]
+description = "Format source, tests, workflows, and documentation"
+run = "npm run format"
+
+[tasks.check]
+description = "Run formatting and TypeScript checks"
+depends = ["format-check", "typecheck"]
+
+[tasks.format-check]
+description = "Verify repository formatting"
+run = "npm run format:check"
+
+[tasks.typecheck]
+description = "Run strict TypeScript validation"
+run = "npm run typecheck"
+
+[tasks.test]
+description = "Run the safe public suite"
+run = "npm run test:public"
+
+[tasks.test-contract]
+description = "Run OpenAPI and contract governance tests"
+run = "npm run test:contract"
+
+[tasks.test-security]
+description = "Run non-destructive API security checks"
+run = "npm run test:security"
+
+[tasks.test-authenticated]
+description = "Run read-only authenticated tests"
+run = "npm run test:authenticated"
+
+[tasks.test-mutations]
+description = "Run state-changing lifecycle tests with cleanup"
+run = "npm run test:mutations"
+
+[tasks.test-uploads]
+description = "Run upload lifecycle tests with cleanup"
+run = "npm run test:uploads"
+
+[tasks.openapi-snapshot]
+description = "Download the live OpenAPI contract into artifacts"
+run = "npm run openapi:snapshot"
+
+[tasks.coverage-report]
+description = "Generate an endpoint-by-endpoint coverage report"
+run = "npm run coverage:report"
+
+[tasks.allure-generate]
+description = "Generate the static Allure HTML report"
+run = "npm run allure:generate"
+
+[tasks.allure-open]
+description = "Serve the generated Allure report locally"
+run = "npm run allure:open"
+
+[tasks.ci]
+description = "Run the same quality gates used by GitHub Actions"
+depends = ["check", "test"]
