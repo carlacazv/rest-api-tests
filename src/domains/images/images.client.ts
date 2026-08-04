@@ -1,6 +1,7 @@
 import type { ApiClient, ApiResponse } from "../../core/http/api-client.js";
 
 export interface ImageSearchParams {
+  [key: string]: string | number | boolean | undefined;
   limit?: number;
   page?: number;
   order?: "ASC" | "DESC" | "RANDOM";
