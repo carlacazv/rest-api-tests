@@ -1,6 +1,6 @@
 import { test, expect } from "../../src/fixtures/api.fixture.js";
 import { env } from "../../src/config/env.js";
-import { expectSuccess } from "../../src/core/http/assertions.js";
+import { expectLiveSuccess } from "../../src/core/http/assertions.js";
 import { labelTest } from "../../src/core/testing/allure.js";
 
 const endpoints = [
@@ -19,7 +19,7 @@ for (const endpoint of endpoints) {
     });
 
     const response = await api.get(endpoint.path, { params: endpoint.params, auth: "none" });
-    expectSuccess(response);
+    expectLiveSuccess(response);
     expect(response.durationMs).toBeLessThan(env.RESPONSE_TIME_BUDGET_MS);
   });
 }
