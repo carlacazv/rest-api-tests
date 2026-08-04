@@ -1,5 +1,9 @@
 import { test, expect } from "../../src/fixtures/api.fixture.js";
-import { expectNoServerError, expectSuccess } from "../../src/core/http/assertions.js";
+import {
+  expectLiveSuccess,
+  expectNoServerError,
+  expectProviderRouteAvailable,
+} from "../../src/core/http/assertions.js";
 import { labelTest } from "../../src/core/testing/allure.js";
 
 for (const row of [
@@ -16,7 +20,7 @@ for (const row of [
     });
 
     const response = await categories.list(row.limit, row.page);
-    expectSuccess(response);
+    expectLiveSuccess(response);
     expect(Array.isArray(response.body)).toBe(true);
     expect((response.body as unknown[]).length).toBeLessThanOrEqual(row.limit);
   });
@@ -31,5 +35,6 @@ test("Invalid category pagination never causes a server error", async ({ categor
   });
 
   const response = await categories.list(0, -1);
+  expectProviderRouteAvailable(response);
   expectNoServerError(response);
 });
