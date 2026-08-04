@@ -1,4 +1,8 @@
-import type { ApiClient, ApiResponse, HttpMethod } from "../../core/http/api-client.js";
+import type {
+  ApiClient,
+  ApiResponse,
+  HttpMethod,
+} from "../../core/http/api-client.js";
 import {
   buildOperationCatalog,
   isReadOnly,
@@ -26,7 +30,10 @@ export class OperationHarness {
     private readonly spec: OpenApiDocument,
   ) {}
 
-  public static async fromLiveContract(api: ApiClient, url: string): Promise<OperationHarness> {
+  public static async fromLiveContract(
+    api: ApiClient,
+    url: string,
+  ): Promise<OperationHarness> {
     return new OperationHarness(api, await loadOpenApiSpec(api, url));
   }
 
