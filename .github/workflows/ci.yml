@@ -32,7 +32,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
@@ -57,7 +57,7 @@ jobs:
       MAX_OPENAPI_PROBES: 2000
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
@@ -95,7 +95,7 @@ jobs:
       TEST_WORKERS: 2
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
@@ -131,7 +131,7 @@ jobs:
       TEST_WORKERS: 1
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
@@ -161,7 +161,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
