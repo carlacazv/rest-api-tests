@@ -1,8 +1,4 @@
-import type {
-  ApiClient,
-  ApiResponse,
-  HttpMethod,
-} from "../../core/http/api-client.js";
+import type { ApiClient, ApiResponse, HttpMethod } from "../../core/http/api-client.js";
 import {
   buildOperationCatalog,
   isReadOnly,
@@ -10,10 +6,7 @@ import {
   type ApiOperation,
 } from "../../core/openapi/catalog.js";
 import { buildOperationRequestSample } from "../../core/openapi/sample-data.js";
-import {
-  validateAgainstSchema,
-  type SchemaIssue,
-} from "../../core/openapi/schema-validator.js";
+import { validateAgainstSchema, type SchemaIssue } from "../../core/openapi/schema-validator.js";
 import { loadOpenApiSpec } from "../../core/openapi/spec-loader.js";
 import type { OpenApiDocument } from "../../core/openapi/types.js";
 import { classifyCoverage } from "../../core/testing/coverage-policy.js";
@@ -30,10 +23,7 @@ export class OperationHarness {
     private readonly spec: OpenApiDocument,
   ) {}
 
-  public static async fromLiveContract(
-    api: ApiClient,
-    url: string,
-  ): Promise<OperationHarness> {
+  public static async fromLiveContract(api: ApiClient, url: string): Promise<OperationHarness> {
     return new OperationHarness(api, await loadOpenApiSpec(api, url));
   }
 
