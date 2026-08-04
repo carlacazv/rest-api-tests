@@ -1,0 +1,50 @@
+name: Format and finalize repository
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: format-finalize-main
+  cancel-in-progress: false
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.18.0
+          package-manager-cache: false
+
+      - name: Install dependencies and create lockfile
+        run: npm install --ignore-scripts
+
+      - name: Apply repository formatting
+        run: npm run format
+
+      - name: Remove temporary workflow
+        run: rm .github/workflows/format-finalize.yml
+
+      - name: Commit formatted repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --all
+          git commit --message 'format repository and lock dependencies'
+          git push origin HEAD:main
