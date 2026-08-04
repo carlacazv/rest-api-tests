@@ -9,10 +9,7 @@ const booleanValue = z
 const schema = z.object({
   DOG_API_ROOT: z.string().url().default("https://api.thedogapi.com"),
   DOG_API_BASE_URL: z.string().url().default("https://api.thedogapi.com/v1"),
-  DOG_API_OPENAPI_URL: z
-    .string()
-    .url()
-    .default("https://api.thedogapi.com/openapi-json"),
+  DOG_API_OPENAPI_URL: z.string().url().default("https://api.thedogapi.com/openapi-json"),
   DOG_API_KEY: z.string().min(1).optional(),
   DOG_API_SUB_ID: z.string().min(1).max(64).default("rest-api-tests"),
   RUN_MUTATION_TESTS: booleanValue,

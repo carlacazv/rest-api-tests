@@ -37,8 +37,10 @@ const obligationRationale: Record<CoverageObligation, string> = {
   "error-contract": "Requires invalid requests to fail predictably and never as server errors.",
   responsiveness: "Checks that functional behavior remains usable within an explicit budget.",
   "mutation-lifecycle": "Validates state transitions and cleanup for write operations.",
-  "upload-lifecycle": "Validates file handling, persistence, and deletion under an explicit safety gate.",
-  "manual-approved-environment": "Prevents costly, administrative, or privacy-sensitive positive calls in shared environments.",
+  "upload-lifecycle":
+    "Validates file handling, persistence, and deletion under an explicit safety gate.",
+  "manual-approved-environment":
+    "Prevents costly, administrative, or privacy-sensitive positive calls in shared environments.",
 };
 
 export function classifyCoverage(operation: ApiOperation): OperationCoverage {
@@ -86,14 +88,20 @@ export function classifyCoverage(operation: ApiOperation): OperationCoverage {
   if (
     operation.path.includes("/accounts/") ||
     operation.summary.toLowerCase().includes("admin") ||
-    ["portrait", "genealogy", "body-condition", "estimated-age", "estimated-weight", "health-tips"].some(
-      (fragment) => operation.path.includes(fragment),
-    )
+    [
+      "portrait",
+      "genealogy",
+      "body-condition",
+      "estimated-age",
+      "estimated-weight",
+      "health-tips",
+    ].some((fragment) => operation.path.includes(fragment))
   ) {
     obligations.add("manual-approved-environment");
     gate = "approved-environment";
     positiveExecution = false;
-    reason = "Positive execution is excluded by risk policy because the operation is administrative, expensive, or quota-intensive.";
+    reason =
+      "Positive execution is excluded by risk policy because the operation is administrative, expensive, or quota-intensive.";
   }
 
   return {
@@ -110,9 +118,9 @@ export function classifyCoverage(operation: ApiOperation): OperationCoverage {
 function hasBoundary(schema: ApiOperation["parameters"][number]["schema"]): boolean {
   return Boolean(
     schema &&
-      (schema.minimum !== undefined ||
-        schema.maximum !== undefined ||
-        schema.minLength !== undefined ||
-        schema.maxLength !== undefined),
+    (schema.minimum !== undefined ||
+      schema.maximum !== undefined ||
+      schema.minLength !== undefined ||
+      schema.maxLength !== undefined),
   );
 }

@@ -16,13 +16,13 @@ Provide broad, maintainable, and safe coverage of every documented The Dog API o
 
 VADER is used because it is a memorable REST API heuristic that prevents teams from focusing only on happy-path payload assertions.
 
-| Area | What is covered | Why |
-| --- | --- | --- |
-| Verbs | supported and unsupported HTTP methods, idempotency expectations | incorrect methods can cause unsafe or ambiguous behavior |
-| Authorization | missing, invalid, and valid API keys; ownership boundaries | access-control failures have high impact |
-| Data | schemas, types, formats, pagination, filters, payload sizes | data-contract drift breaks consumers |
-| Errors | status codes, stable messages, no stack traces, no 5xx for invalid input | predictable errors improve resilience and security |
-| Responsiveness | endpoint budgets and slow-operation reporting | functional correctness is insufficient when responses are unusably slow |
+| Area           | What is covered                                                          | Why                                                                     |
+| -------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| Verbs          | supported and unsupported HTTP methods, idempotency expectations         | incorrect methods can cause unsafe or ambiguous behavior                |
+| Authorization  | missing, invalid, and valid API keys; ownership boundaries               | access-control failures have high impact                                |
+| Data           | schemas, types, formats, pagination, filters, payload sizes              | data-contract drift breaks consumers                                    |
+| Errors         | status codes, stable messages, no stack traces, no 5xx for invalid input | predictable errors improve resilience and security                      |
+| Responsiveness | endpoint budgets and slow-operation reporting                            | functional correctness is insufficient when responses are unusably slow |
 
 ## Equivalence partitioning
 

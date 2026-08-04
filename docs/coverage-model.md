@@ -2,14 +2,14 @@
 
 Every operation discovered in the live OpenAPI specification is assigned automated obligations.
 
-| Operation class | Required obligations |
-| --- | --- |
-| Read-only GET | valid probe, response contract, data partition, responsiveness, error handling |
-| Protected read | missing-key and invalid-key rejection plus valid authenticated probe when a key exists |
-| Mutation | authentication rejection, payload validation, lifecycle test when safely supported |
-| Upload | authentication rejection, file-type and size partitions, lifecycle cleanup when explicitly enabled |
-| Expensive analysis | authentication and validation coverage by default; positive execution only in an approved environment |
-| Admin-only | authentication and authorization rejection; positive execution excluded without an authorized test account |
+| Operation class    | Required obligations                                                                                       |
+| ------------------ | ---------------------------------------------------------------------------------------------------------- |
+| Read-only GET      | valid probe, response contract, data partition, responsiveness, error handling                             |
+| Protected read     | missing-key and invalid-key rejection plus valid authenticated probe when a key exists                     |
+| Mutation           | authentication rejection, payload validation, lifecycle test when safely supported                         |
+| Upload             | authentication rejection, file-type and size partitions, lifecycle cleanup when explicitly enabled         |
+| Expensive analysis | authentication and validation coverage by default; positive execution only in an approved environment      |
+| Admin-only         | authentication and authorization rejection; positive execution excluded without an authorized test account |
 
 The generated report contains:
 

@@ -7,7 +7,10 @@ export class BreedsClient {
     return this.api.get("/breeds", { params });
   }
 
-  public search(query: string, params: Record<string, string | number | boolean> = {}): Promise<ApiResponse> {
+  public search(
+    query: string,
+    params: Record<string, string | number | boolean> = {},
+  ): Promise<ApiResponse> {
     return this.api.get("/breeds/search", { params: { q: query, ...params } });
   }
 

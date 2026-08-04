@@ -1,6 +1,8 @@
 export type FactorValues = Record<string, readonly unknown[]>;
 
-export function buildPairwiseCases<T extends FactorValues>(factors: T): Array<{ [K in keyof T]: T[K][number] }> {
+export function buildPairwiseCases<T extends FactorValues>(
+  factors: T,
+): Array<{ [K in keyof T]: T[K][number] }> {
   const entries = Object.entries(factors);
   if (entries.length === 0) {
     return [];
@@ -61,12 +63,19 @@ function coveredPairs(candidate: Record<string, unknown>): string[] {
   const pairs: string[] = [];
   for (let left = 0; left < entries.length; left += 1) {
     for (let right = left + 1; right < entries.length; right += 1) {
-      pairs.push(pairKey(entries[left]![0], entries[left]![1], entries[right]![0], entries[right]![1]));
+      pairs.push(
+        pairKey(entries[left]![0], entries[left]![1], entries[right]![0], entries[right]![1]),
+      );
     }
   }
   return pairs;
 }
 
-function pairKey(leftName: string, leftValue: unknown, rightName: string, rightValue: unknown): string {
+function pairKey(
+  leftName: string,
+  leftValue: unknown,
+  rightName: string,
+  rightValue: unknown,
+): string {
   return JSON.stringify([leftName, leftValue, rightName, rightValue]);
 }

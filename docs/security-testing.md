@@ -21,10 +21,10 @@ The suite does not brute force, flood, bypass authentication, exploit another us
 
 ## Authorization matrix
 
-| Resource state | No key | Invalid key | Valid key, own resource | Valid key, unknown resource |
-| --- | --- | --- | --- | --- |
-| Read account resource | reject | reject | allow | not found or reject |
-| Create account resource | reject | reject | allow | not applicable |
-| Delete account resource | reject | reject | allow and verify deletion | not found or reject |
+| Resource state          | No key | Invalid key | Valid key, own resource   | Valid key, unknown resource |
+| ----------------------- | ------ | ----------- | ------------------------- | --------------------------- |
+| Read account resource   | reject | reject      | allow                     | not found or reject         |
+| Create account resource | reject | reject      | allow                     | not applicable              |
+| Delete account resource | reject | reject      | allow and verify deletion | not found or reject         |
 
 Positive cross-account authorization testing requires two dedicated provider-approved test accounts and is intentionally not simulated against real users.

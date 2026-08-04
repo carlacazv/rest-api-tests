@@ -2,10 +2,7 @@ import type { ApiClient } from "../http/api-client.js";
 import { expectSuccess } from "../http/assertions.js";
 import type { OpenApiDocument } from "./types.js";
 
-export async function loadOpenApiSpec(
-  api: ApiClient,
-  url: string,
-): Promise<OpenApiDocument> {
+export async function loadOpenApiSpec(api: ApiClient, url: string): Promise<OpenApiDocument> {
   const response = await api.get<OpenApiDocument>(url, { auth: "none" });
   expectSuccess(response, 200);
 

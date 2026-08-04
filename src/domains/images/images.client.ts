@@ -27,7 +27,12 @@ export class ImagesClient {
     return this.api.get("/images", { params });
   }
 
-  public upload(input: { buffer: Buffer; fileName: string; mimeType: string; subId: string }): Promise<ApiResponse> {
+  public upload(input: {
+    buffer: Buffer;
+    fileName: string;
+    mimeType: string;
+    subId: string;
+  }): Promise<ApiResponse> {
     return this.api.post("/images/upload", {
       multipart: {
         file: {

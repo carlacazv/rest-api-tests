@@ -14,7 +14,9 @@ import { labelTest } from "../../src/core/testing/allure.js";
 const unsupportedMethods = ["POST", "PUT", "PATCH", "DELETE"] as const;
 
 for (const method of unsupportedMethods) {
-  test(`VADER Verbs: ${method} is not accepted by the breeds collection @security`, async ({ api }) => {
+  test(`VADER Verbs: ${method} is not accepted by the breeds collection @security`, async ({
+    api,
+  }) => {
     await labelTest({
       feature: "Security",
       story: "VADER Verbs",
@@ -27,7 +29,9 @@ for (const method of unsupportedMethods) {
   });
 }
 
-test("VADER Authorization: protected operations reject missing and invalid credentials @security", async ({ api }, testInfo) => {
+test("VADER Authorization: protected operations reject missing and invalid credentials @security", async ({
+  api,
+}, testInfo) => {
   await labelTest({
     feature: "Security",
     story: "VADER Authorization",
@@ -45,11 +49,15 @@ test("VADER Authorization: protected operations reject missing and invalid crede
     const sample = buildOperationRequestSample(spec, operation);
     for (const auth of ["none", "invalid"] as const) {
       await test.step(`${operation.method.toUpperCase()} ${operation.path} with ${auth} auth`, async () => {
-        const response = await api.request(operation.method.toUpperCase() as HttpMethod, sample.path, {
-          params: sample.params,
-          auth,
-          data: sample.data,
-        });
+        const response = await api.request(
+          operation.method.toUpperCase() as HttpMethod,
+          sample.path,
+          {
+            params: sample.params,
+            auth,
+            data: sample.data,
+          },
+        );
         expectRejectedWithoutServerError(response);
         expectNoSensitiveErrorDisclosure(response);
 
@@ -68,7 +76,9 @@ test("VADER Authorization: protected operations reject missing and invalid crede
   });
 });
 
-test("VADER Data and Errors: harmless injection markers do not disclose internals @security", async ({ breeds }) => {
+test("VADER Data and Errors: harmless injection markers do not disclose internals @security", async ({
+  breeds,
+}) => {
   await labelTest({
     feature: "Security",
     story: "VADER Data and Errors",
@@ -94,7 +104,10 @@ test("API key is never placed in a request URL @security", async ({ favourites }
     tags: ["security", "secrets"],
   });
 
-  test.skip(!env.DOG_API_KEY, "DOG_API_KEY is required for this authenticated confidentiality check.");
+  test.skip(
+    !env.DOG_API_KEY,
+    "DOG_API_KEY is required for this authenticated confidentiality check.",
+  );
   const response = await favourites.list({ limit: 1 });
   expect(response.url).not.toContain(env.DOG_API_KEY!);
   expect(response.text).not.toContain(env.DOG_API_KEY!);

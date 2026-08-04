@@ -21,7 +21,9 @@ test("All documented read-query boundaries fail safely @contract", async ({ api 
 
   for (const operation of operations) {
     const sample = buildOperationRequestSample(spec, operation);
-    for (const parameter of operation.parameters.filter((item) => item.in === "query" && item.schema)) {
+    for (const parameter of operation.parameters.filter(
+      (item) => item.in === "query" && item.schema,
+    )) {
       const values = outsideBoundaryValues(parameter.schema!);
       for (const value of values) {
         if (probes >= env.MAX_OPENAPI_PROBES) {
@@ -29,10 +31,14 @@ test("All documented read-query boundaries fail safely @contract", async ({ api 
         }
         probes += 1;
         await test.step(`${operation.operationId}: ${parameter.name}=${String(value)}`, async () => {
-          const response = await api.request(operation.method.toUpperCase() as "GET" | "HEAD", sample.path, {
-            params: { ...sample.params, [parameter.name]: value },
-            auth: operation.security.length > 0 && !env.DOG_API_KEY ? "none" : "auto",
-          });
+          const response = await api.request(
+            operation.method.toUpperCase() as "GET" | "HEAD",
+            sample.path,
+            {
+              params: { ...sample.params, [parameter.name]: value },
+              auth: operation.security.length > 0 && !env.DOG_API_KEY ? "none" : "auto",
+            },
+          );
           expectNoServerError(response, operation.operationId);
           results.push({
             operationId: operation.operationId,

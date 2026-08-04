@@ -25,7 +25,9 @@ export function buildOperationRequestSample(
   }
 
   const contentType = operation.requestBodyContentTypes[0];
-  const bodySchema = contentType ? operation.raw.requestBody?.content?.[contentType]?.schema : undefined;
+  const bodySchema = contentType
+    ? operation.raw.requestBody?.content?.[contentType]?.schema
+    : undefined;
   const data = bodySchema ? sampleSchema(spec, bodySchema) : undefined;
 
   return {

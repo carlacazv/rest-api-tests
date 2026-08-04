@@ -19,6 +19,11 @@ export function numericBoundaryCases(minimum: number, maximum: number): Boundary
     { name: "minimum plus one", value: minimum + 1, position: "above-min", expected: "valid" },
     { name: "maximum minus one", value: maximum - 1, position: "below-max", expected: "valid" },
     { name: "maximum", value: maximum, position: "max", expected: "valid" },
-    { name: "maximum plus one", value: maximum + 1, position: "above-max", expected: "valid-or-clamped" },
+    {
+      name: "maximum plus one",
+      value: maximum + 1,
+      position: "above-max",
+      expected: "valid-or-clamped",
+    },
   ];
 }

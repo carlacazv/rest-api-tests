@@ -6,7 +6,9 @@ import { buildOperationRequestSample } from "../../src/core/openapi/sample-data.
 import { loadOpenApiSpec } from "../../src/core/openapi/spec-loader.js";
 import { labelTest } from "../../src/core/testing/allure.js";
 
-test("VADER Verbs: every documented path rejects TRACE safely @security", async ({ api }, testInfo) => {
+test("VADER Verbs: every documented path rejects TRACE safely @security", async ({
+  api,
+}, testInfo) => {
   await labelTest({
     feature: "Security",
     story: "VADER Verbs across the OpenAPI surface",

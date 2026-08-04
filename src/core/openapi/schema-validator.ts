@@ -66,7 +66,13 @@ export function validateAgainstSchema(
       for (const [name, propertySchema] of Object.entries(resolved.properties ?? {})) {
         if (name in value) {
           issues.push(
-            ...validateAgainstSchema(spec, propertySchema, value[name], `${path}.${name}`, depth + 1),
+            ...validateAgainstSchema(
+              spec,
+              propertySchema,
+              value[name],
+              `${path}.${name}`,
+              depth + 1,
+            ),
           );
         }
       }

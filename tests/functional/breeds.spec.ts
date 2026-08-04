@@ -6,7 +6,11 @@ import { labelTest } from "../../src/core/testing/allure.js";
 const searchPartitions = [
   { name: "valid partial name", query: "retr", expected: "success" },
   { name: "valid full name", query: "Labrador Retriever", expected: "success" },
-  { name: "unknown well-formed name", query: "breed-that-does-not-exist-xyz", expected: "empty-or-reject" },
+  {
+    name: "unknown well-formed name",
+    query: "breed-that-does-not-exist-xyz",
+    expected: "empty-or-reject",
+  },
   { name: "single character boundary", query: "a", expected: "success" },
 ] as const;
 

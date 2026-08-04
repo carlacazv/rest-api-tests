@@ -38,9 +38,14 @@ export function assessOperationRisk(operation: ApiOperation): RiskAssessment {
   }
 
   if (
-    ["portrait", "genealogy", "body-condition", "estimated-age", "estimated-weight", "health-tips"].some(
-      (fragment) => operation.path.includes(fragment),
-    )
+    [
+      "portrait",
+      "genealogy",
+      "body-condition",
+      "estimated-age",
+      "estimated-weight",
+      "health-tips",
+    ].some((fragment) => operation.path.includes(fragment))
   ) {
     likelihood = 4;
     impact = 5;
@@ -52,7 +57,8 @@ export function assessOperationRisk(operation: ApiOperation): RiskAssessment {
   }
 
   const score = likelihood * impact;
-  const level: RiskLevel = score >= 16 ? "critical" : score >= 9 ? "high" : score >= 4 ? "medium" : "low";
+  const level: RiskLevel =
+    score >= 16 ? "critical" : score >= 9 ? "high" : score >= 4 ? "medium" : "low";
 
   return { likelihood, impact, score, level, rationale };
 }

@@ -13,7 +13,8 @@ test(title, async ({ api }, testInfo) => {
     story: "Endpoint coverage classification",
     risk: "critical",
     tags: ["contract", "openapi", "coverage"],
-    description: "Fails when the provider adds an operation that cannot be assigned explicit test obligations.",
+    description:
+      "Fails when the provider adds an operation that cannot be assigned explicit test obligations.",
   });
 
   const spec = await loadOpenApiSpec(api, env.DOG_API_OPENAPI_URL);
@@ -22,10 +23,17 @@ test(title, async ({ api }, testInfo) => {
 
   expect(spec.openapi).toMatch(/^3\./);
   expect(operations.length).toBeGreaterThan(0);
-  expect(new Set(operations.map((operation) => operation.operationId)).size).toBe(operations.length);
+  expect(new Set(operations.map((operation) => operation.operationId)).size).toBe(
+    operations.length,
+  );
 
   for (const item of coverage) {
-    expect.soft(item.operation.responses, `${item.operation.method.toUpperCase()} ${item.operation.path}`).not.toEqual({});
+    expect
+      .soft(
+        item.operation.responses,
+        `${item.operation.method.toUpperCase()} ${item.operation.path}`,
+      )
+      .not.toEqual({});
     expect.soft(item.obligations.length, item.operation.operationId).toBeGreaterThan(0);
     expect.soft(item.risk.score, item.operation.operationId).toBeGreaterThan(0);
   }

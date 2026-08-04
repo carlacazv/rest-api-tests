@@ -105,7 +105,9 @@ function removeUndefined(
   }
 
   return Object.fromEntries(
-    Object.entries(values).filter((entry): entry is [string, string | number | boolean] => entry[1] !== undefined),
+    Object.entries(values).filter(
+      (entry): entry is [string, string | number | boolean] => entry[1] !== undefined,
+    ),
   );
 }
 

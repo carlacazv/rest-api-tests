@@ -30,10 +30,14 @@ test(testTitle, async ({ api }, testInfo) => {
   for (const operation of operations) {
     await test.step(`${operation.method.toUpperCase()} ${operation.path}`, async () => {
       const sample = buildOperationRequestSample(spec, operation);
-      const response = await api.request(operation.method.toUpperCase() as "GET" | "HEAD", sample.path, {
-        params: sample.params,
-        auth: operation.security.length > 0 && !env.DOG_API_KEY ? "none" : "auto",
-      });
+      const response = await api.request(
+        operation.method.toUpperCase() as "GET" | "HEAD",
+        sample.path,
+        {
+          params: sample.params,
+          auth: operation.security.length > 0 && !env.DOG_API_KEY ? "none" : "auto",
+        },
+      );
 
       expectNoServerError(response, operation.operationId);
 

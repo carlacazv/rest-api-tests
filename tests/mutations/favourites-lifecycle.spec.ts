@@ -14,7 +14,10 @@ test(title, async ({ favourites, images }) => {
     tags: ["mutation", "crud", "cleanup"],
   });
 
-  test.skip(!env.DOG_API_KEY || !env.RUN_MUTATION_TESTS, "DOG_API_KEY and RUN_MUTATION_TESTS=true are required.");
+  test.skip(
+    !env.DOG_API_KEY || !env.RUN_MUTATION_TESTS,
+    "DOG_API_KEY and RUN_MUTATION_TESTS=true are required.",
+  );
 
   const imageResponse = await images.search({ limit: 1 });
   expectSuccess(imageResponse);
