@@ -27,11 +27,11 @@
     "coverage:report": "tsx scripts/generate-coverage-report.ts"
   },
   "devDependencies": {
-    "@playwright/test": "1.61.1",
+    "@playwright/test": "1.62.1",
     "@types/node": "24.3.0",
     "allure-commandline": "2.43.0",
-    "allure-js-commons": "3.10.2",
-    "allure-playwright": "3.10.2",
+    "allure-js-commons": "3.11.0",
+    "allure-playwright": "3.11.0",
     "dotenv": "17.4.2",
     "prettier": "3.9.6",
     "tsx": "4.22.4",
